@@ -1,0 +1,228 @@
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Modern Menu - WhatsApp Order</title>
+<style>
+  .wa-body {
+    background: #f4f4f4;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  .wa-button {
+    display: inline-block;
+    background-color: #25D366;
+    border-radius: 50px;
+    padding: 12px 20px;
+    box-shadow: 0 4px 12px rgba(37, 211, 102, 0.4);
+    transition: all 0.3s ease;
+  }
+  .wa-button a {
+    text-decoration: none;
+    color: white;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .wa-icon {
+    width: 22px;
+    height: 22px;
+    fill: white;
+  }
+  .wa-button:hover {
+    background-color: #1ebe5d;
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 8px 16px rgba(37, 211, 102, 0.6);
+  }
+  .cak-body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    padding: 50px;
+    background: #fff;
+  }
+  .cak-subtitle {
+    font-family: cursive;
+    font-size: 24px;
+    font-weight: bold;
+    color: orange;
+    position: relative;
+    display: inline-block;
+    text-shadow:
+      1px 0 orange,
+     -1px 0 orange,
+      0 1px orange,
+      0 -1px orange;
+  }
+  .cak-subtitle::before,
+  .cak-subtitle::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    width: 40px;
+    height: 3px;
+    background-color: orange;
+  }
+  .cak-subtitle::before {
+    left: -50px;
+  }
+  .cak-subtitle::after {
+    right: -50px;
+  }
+  .cak-title {
+    font-family: Arial, sans-serif;
+    font-weight: bold;
+    font-size: 12px;
+    color: #222;
+    margin-top: 10px;
+    display: block;
+  }
+  body {font-family: 'Poppins', sans-serif; margin: 0; padding: 20px; background: #f0f2f5;}
+  h2 {text-align: center; margin-bottom: 20px;}
+  .category {display: flex; justify-content: center; margin-bottom: 20px;}
+  .category div {text-align: center; margin: 0 15px; cursor: pointer; font-size: 14px; transition: transform 0.2s;}
+  .category div:hover {transform: scale(1.1);}
+  .category div img {width: 45px; height: 45px;}
+  .menu-item {display: flex; align-items: center; background: #fff; border-radius: 12px; padding: 12px; margin-bottom: 15px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);}
+  .menu-item img {width: 70px; height: 70px; object-fit: cover; border-radius: 10px; margin-right: 12px; cursor: pointer;}
+  .menu-info {flex-grow: 1;}
+  .menu-info h4 {margin: 0 0 5px 0; font-size: 16px;}
+  .menu-info p {margin: 0; font-size: 12px; color: #777;}
+  .menu-price {color: #ff7b00; font-weight: bold; font-size: 16px; margin-right: 8px;}
+  .menu-item button {background: linear-gradient(45deg, #ff7b00, #ffa500); border: none; color: white; padding: 6px 10px; border-radius: 8px; cursor: pointer;}
+  .cart-btn {position: fixed; bottom: 20px; right: 20px; background: linear-gradient(135deg, #FF6F00, #FFA000); border: none; padding: 16px; border-radius: 50%; box-shadow: 0 8px 16px rgba(0,0,0,0.3); cursor: pointer;}
+  .cart-btn svg {width: 32px; height: 32px;}
+  .cart-count {position: absolute; top: -8px; right: -8px; background: red; color: white; width: 20px; height: 20px; border-radius: 50%; font-size: 12px; text-align: center; line-height: 20px; font-weight: bold;}
+  .cart-summary-backdrop {position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.4); display: none; justify-content: center; align-items: center;}
+  .cart-summary {background: #fff; padding: 20px; border-radius: 12px; width: 300px;}
+  .cart-summary input[type="text"] {width: 100%; padding: 8px; margin: 10px 0; border-radius: 6px; border: 1px solid #ccc;}
+  .cart-summary ul {list-style: none; padding: 0;}
+  .cart-summary li {display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 14px;}
+  .remove-btn {background: red; color: #fff; border: none; border-radius: 50%; width: 20px; height: 20px; cursor: pointer; font-size: 12px; line-height: 18px;}
+  .notification {position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background: #e8f5e9; color: #4caf50; padding: 12px 20px; border-radius: 30px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); font-weight: 500; font-size: 14px; display: none; align-items: center; animation: fadein 0.3s ease;}
+  @keyframes fadein {from {opacity: 0; transform: translateX(-50%) translateY(20px);} to {opacity: 1; transform: translateX(-50%) translateY(0);}}
+  .clear-btn {background: #f44336; color: white; border: none; padding: 8px 12px; border-radius: 6px; cursor: pointer; margin-top: 10px; width: 100%;}
+</style>
+</head>
+<body class="cak-body">
+<div class="cak-subtitle">Warung Cak Di</div>
+<div class="cak-title">Jl.Kertajaya - Surabaya</div>
+<h2>Most Popular Items</h2>
+<div class="category">
+  <div><img src="https://cdn-icons-png.flaticon.com/512/2921/2921822.png"><p><strong>Popular</strong><br>Breakfast</p></div>
+  <div><img src="https://cdn-icons-png.flaticon.com/512/1046/1046784.png"><p><strong>Special</strong><br>Lunch</p></div>
+  <div><img src="https://cdn-icons-png.flaticon.com/512/3075/3075977.png"><p><strong>Lovely</strong><br>Dinner</p></div>
+</div>
+<!-- Menu Items -->
+<div class="menu-item">
+  <img src="https://d2vuyvo9qdtgo9.cloudfront.net/foods/October2023/q37X03Mb7vOsvq7O7OcM.webp" alt="" onclick="openPopup(this.src)">
+  <div class="menu-info"><h4>Chicken Burger</h4><p>Lorem ipsum dolor</p></div>
+  <div class="menu-price">$115</div>
+  <button onclick="addToCart('Chicken Burger', 115)">+</button>
+</div>
+<div class="menu-item">
+  <img src="https://img.tempo.co/indonesiana/images/all/2017/04/18/mie-ayam-putra-22.jpg" alt="" onclick="openPopup(this.src)">
+  <div class="menu-info"><h4>Mie Ayam</h4><p>Lorem ipsum dolor</p></div>
+  <div class="menu-price">$90</div>
+  <button onclick="addToCart('Mie Ayam', 90)">+</button>
+</div>
+<div class="menu-item">
+  <img src="https://via.placeholder.com/70" alt="" onclick="openPopup(this.src)">
+  <div class="menu-info"><h4>Pizza</h4><p>Lorem ipsum dolor</p></div>
+  <div class="menu-price">$150</div>
+  <button onclick="addToCart('Pizza', 150)">+</button>
+</div>
+<div class="cart-summary-backdrop" id="cartBackdrop" onclick="toggleCart()">
+  <div class="cart-summary" onclick="event.stopPropagation()">
+    <h4>Keranjang</h4>
+    <ul id="cartItems"></ul>
+    <p>Total: $<span id="cartTotal">0</span></p>
+    <input type="text" id="tableNumber" placeholder="Masukkan Nomor Meja">
+    <button class="clear-btn" onclick="clearCart()">Kosongkan Keranjang</button>
+    <div class="wa-button" style="margin-top:10px;">
+      <a id="waLink" href="#" target="_blank">
+        <svg xmlns="http://www.w3.org/2000/svg" class="wa-icon" viewBox="0 0 24 24">
+          <path fill="currentColor" d="..."/>
+        </svg>
+        Checkout via WhatsApp
+      </a>
+    </div>
+  </div>
+</div>
+<!-- Tombol Keranjang dikembalikan -->
+<button class="cart-btn" onclick="toggleCart()">
+  <svg width="30" height="30" viewBox="0 0 24 24" fill="none">
+    <path d="M6 6h15l-1.5 9h-13z" stroke="#fff" stroke-width="2" fill="orange"/>
+    <circle cx="9" cy="21" r="1.5" fill="#fff"/>
+    <circle cx="17" cy="21" r="1.5" fill="#fff"/>
+  </svg>
+  <span class="cart-count" id="cartCount">0</span>
+</button>
+<div id="imgPopup" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); justify-content:center; align-items:center; z-index:9999;">
+  <span onclick="closePopup()" style="position:absolute; top:20px; right:30px; color:#fff; font-size:30px; cursor:pointer;">&times;</span>
+  <img id="popupImage" src="" style="max-width:90%; max-height:90%; border-radius:10px;">
+</div>
+<script>
+let cart = JSON.parse(localStorage.getItem('cart')) || [];
+let tableNumber = localStorage.getItem('tableNumber') || '';
+document.getElementById('tableNumber').value = tableNumber;
+function addToCart(name, price) {
+  cart.push({name, price});
+  saveCart();
+  updateCart();
+}
+function removeFromCart(index) {
+  cart.splice(index, 1);
+  saveCart();
+  updateCart();
+}
+function clearCart() {
+  cart = [];
+  saveCart();
+  updateCart();
+}
+function updateCart() {
+  const cartItems = document.getElementById('cartItems');
+  const cartTotal = document.getElementById('cartTotal');
+  const waLink = document.getElementById('waLink');
+  const cartCount = document.getElementById('cartCount');
+  tableNumber = document.getElementById('tableNumber').value;
+  localStorage.setItem('tableNumber', tableNumber);
+  cartItems.innerHTML = '';
+  let total = 0;
+  let waMessage = 'Halo, saya mau pesan:\n';
+  cart.forEach((item, index) => {
+    const li = document.createElement('li');
+    li.innerHTML = `${item.name} - $${item.price} <button class="remove-btn" onclick="removeFromCart(${index})">x</button>`;
+    cartItems.appendChild(li);
+    total += item.price;
+    waMessage += `- ${item.name}: $${item.price}\n`;
+  });
+  const meja = tableNumber ? `Nomor Meja: ${tableNumber}\n` : '';
+  cartTotal.textContent = total;
+  waMessage = `${meja}${waMessage}Total: $${total}`;
+  waLink.href = 'https://wa.me/6283851070337?text=' + encodeURIComponent(waMessage);
+  cartCount.textContent = cart.length;
+}
+document.getElementById('tableNumber').addEventListener('input', updateCart);
+function toggleCart() {
+  const backdrop = document.getElementById('cartBackdrop');
+  backdrop.style.display = (backdrop.style.display === 'flex') ? 'none' : 'flex';
+}
+function saveCart() {
+  localStorage.setItem('cart', JSON.stringify(cart));
+}
+window.onload = updateCart;
+function openPopup(src) {
+  document.getElementById('popupImage').src = src;
+  document.getElementById('imgPopup').style.display = 'flex';
+}
+function closePopup() {
+  document.getElementById('imgPopup').style.display = 'none';
+}
+</script>
+</body>
+</html>
